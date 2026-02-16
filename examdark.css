@@ -152,7 +152,7 @@ body {
 /* Dark mode button */
 .theme-btn {
   margin-right: 10px;
-  background: #222;
+  background: var(--glass: rgba(255, 255, 255, 0.18));
   color: #fff;
   border: none;
 }
@@ -285,6 +285,7 @@ body {
     color: var(--text-dark);
   }
 }
+
 
 
 
