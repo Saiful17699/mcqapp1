@@ -1,0 +1,279 @@
+/* =========================================
+   Global Reset & Theme
+========================================= */
+
+:root {
+  --primary: #4f46e5;
+  --primary-dark: #4338ca;
+  --success: #16a34a;
+  --danger: #dc2626;
+  --bg: #f4f6fb;
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --text-dark: #111827;
+  --text-muted: #6b7280;
+  --radius: 14px;
+  --shadow-soft: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #eef2ff, #f8fafc);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* =========================================
+   Layout
+========================================= */
+
+.app-container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 32px 20px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 18px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* =========================================
+   Cards (Glass Style)
+========================================= */
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 24px;
+  margin-top: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+/* =========================================
+   Dashboard Grid
+========================================= */
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* =========================================
+   Buttons
+========================================= */
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 12px;
+  transition: all 0.25s ease;
+  background: #e5e7eb;
+  color: #111827;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.35);
+}
+
+.success-btn {
+  background: linear-gradient(135deg, #22c55e, var(--success));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(22, 163, 74, 0.35);
+}
+
+.danger-btn {
+  background: linear-gradient(135deg, #ef4444, var(--danger));
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.35);
+}
+
+/* =========================================
+   Inputs
+========================================= */
+
+input[type="number"],
+input[type="file"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-top: 8px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* =========================================
+   Exam UI
+========================================= */
+
+.exam-top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  padding: 10px 14px;
+  background: #eef2ff;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+#questionBox h3 {
+  margin-top: 0;
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+/* =========================================
+   Options
+========================================= */
+
+.option {
+  display: flex;
+  align-items: center;
+  padding: 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fff;
+}
+
+.option:hover {
+  background: #f5f7ff;
+  border-color: var(--primary);
+}
+
+.option input {
+  margin-right: 12px;
+  transform: scale(1.2);
+}
+
+/* =========================================
+   Navigation Buttons
+========================================= */
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* =========================================
+   Result Box
+========================================= */
+
+#resultBox {
+  background: linear-gradient(135deg, #eef2ff, #ffffff);
+  border-radius: var(--radius);
+  padding: 20px;
+  text-align: center;
+}
+
+#resultBox p {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 8px 0;
+}
+
+/* =========================================
+   Footer
+========================================= */
+
+.app-footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   Responsive
+========================================= */
+
+@media (max-width: 900px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .app-header h1 {
+    font-size: 22px;
+  }
+}
+
+
+.subtitle {
+  margin: 6px 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.status-badge {
+  background: rgba(34, 197, 94, 0.15);
+  color: #15803d;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0;
+}
+
+.feature-list li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #374151;
+}

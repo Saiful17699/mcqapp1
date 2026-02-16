@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Local MCQ Exam App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
+  <meta name="description" content="Offline browser-based MCQ examination system with admin panel and exam mode.">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Header / Hero Section -->
+  <header class="app-header">
+    <div class="header-text">
+      <h1>📘 Local MCQ Exam App</h1>
+      <p class="subtitle">Secure • Offline • Browser-Based Examination System</p>
+    </div>
+    <div class="header-status">
+      <span class="status-badge">🟢 Offline Ready</span>
+    </div>
+  </header>
+
+  <!-- Main Dashboard -->
+  <main class="dashboard">
+
+    <!-- Admin Panel Card -->
+    <section class="card card-admin">
+      <div class="card-content">
+        <h2>🛠 Admin Panel</h2>
+        <p>
+          Manage MCQs offline: create, edit, import/export, preview exams, and backup your database.
+        </p>
+        <ul class="feature-list">
+          <li>Import / Export Questions</li>
+          <li>Edit MCQ Database</li>
+          <li>Backup & Restore</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="admin.html" class="btn primary-btn">Open Admin Panel →</a>
+      </div>
+    </section>
+
+    <!-- Exam Panel Card -->
+    <section class="card card-exam">
+      <div class="card-content">
+        <h2>📝 Start Exam</h2>
+        <p>
+          Take exams offline, get auto-scored results, and review performance history.
+        </p>
+        <ul class="feature-list">
+          <li>Timed Exams</li>
+          <li>Auto Scoring</li>
+          <li>Result Analysis</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="exam.html" class="btn success-btn">Start Exam →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <p>🔒 No Internet Required &nbsp;•&nbsp; 💾 Data Stored Locally &nbsp;•&nbsp; ⚡ Fast & Secure</p>
+    <small>© 2026 Local MCQ Exam App</small>
+  </footer>
+
+</div>
+
+<!-- Service Worker Registration -->
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker
+      .register("service-worker.js")
+      .then(() => console.log("Service Worker Registered"))
+      .catch(err => console.error("Service Worker Error:", err));
+  });
+}
+</script>
+
+</body>
+</html>

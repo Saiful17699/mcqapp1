@@ -1,0 +1,10 @@
+id,question_text,option1,option2,option3,option4,correct_answer_index,explanation,subject,chapter,topic,difficulty
+1,What is the capital of France?,Paris,Lyon,Marseille,Nice,0,Paris is the capital city of France.,Geography,Europe,Capitals,Easy
+2,Which element has the chemical symbol 'O'?,Oxygen,Gold,Hydrogen,Iron,0,Oxygen has the chemical symbol 'O'.,Chemistry,Periodic Table,Elements,Easy
+3,2 + 2 equals?,3,4,5,,1,2 + 2 = 4.,Math,Arithmetic,Addition,Easy
+4,Which planet is known as the Red Planet?,Venus,Earth,Mars,Jupiter,2,Mars is called the Red Planet due to its iron oxide.,Astronomy,Planets,Inner Planets,Medium
+5,Who wrote 'Hamlet'?,Charles Dickens,William Shakespeare,Mark Twain,Leo Tolstoy,1,Hamlet was written by William Shakespeare.,Literature,Plays,Shakespeare Works,Medium
+6,Water boils at what temperature at sea level?,90°C,100°C,120°C,80°C,1,Water boils at 100°C at standard atmospheric pressure.,Science,Physics,Thermodynamics,Easy
+7,Which programming language is used for web development primarily?,Python,C++,JavaScript,Java,2,JavaScript is the standard language for web development.,Computer Science,Programming,Web Development,Medium
+8,প্রাকৃতিক গ্যাসে শতকরা কত ভাগ ইথেন থাকে?,3 ভাগ,4 ভাগ,7 ভাগ,6 ভাগ,3,প্রাকৃতিক গ্যাসের প্রধান উপাদান মিথেন (CH₄) যার পরিমাণ ৪০%, এছাড়াও এ গ্যাসে ইথেন (C₂H₆) 7%, প্রোপেন 6%, বিউটেন ও আইসোবিউটেন 4%, পেন্টেন 3% আছে। সুতরাং ইথেনের শতাংশ 7%, তাই সঠিক উত্তর: 7 ভাগ.,রসায়ন,প্রাকৃতিক গ্যাস,গ্যাসের উপাদান,মধ্যম
+9,নিচের কোন যৌগটি ব্রোমিন দ্রবণের লাল বর্ণকে বর্ণহীন করতে পারে?,CH₄,CH₂O,C₂H₂O,C₂H₂,4,অসম্পৃক্ত জৈব যৌগ ব্রোমিন দ্রবণের লাল রঙকে বর্ণহীন করতে পারে। অ্যালকিন ও অ্যালকাইন যৌগের মধ্যে C≡C বা C=C থাকে। সুতরাং C₂H₂ (অ্যালকিন) ব্রোমিন দ্রবণকে বর্ণহীন করতে পারে।,রসায়ন,জৈব যৌগ,অসম্পৃক্ত যৌগ,মধ্যম

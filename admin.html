@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard — MCQ Exam App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+
+<div class="admin-layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">📘 MCQ Admin</h2>
+
+    <nav>
+      <a class="active">⚙ Dashboard</a>
+      <a href="index.html">🏠 Home</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      Offline • Secure
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- Top Bar -->
+    <header class="topbar">
+      <h1>Admin Dashboard</h1>
+      <span class="badge">🟢 Offline Mode</span>
+    </header>
+
+    <!-- Cards Grid -->
+    <section class="grid">
+
+      <!-- Import -->
+      <div class="glass-card">
+        <h3>📥 Import Questions</h3>
+        <p>Upload MCQs in JSON or CSV format</p>
+
+        <input type="file" id="fileInput" accept=".json,.csv">
+        <button class="btn primary-btn" onclick="handleImport()">
+          Import Questions
+        </button>
+
+        <p id="importStatus"></p>
+      </div>
+
+      <!-- Database Tools -->
+      <div class="glass-card">
+        <h3>💾 Database Tools</h3>
+        <p>Backup or wipe your question bank</p>
+
+        <button class="btn" onclick="exportDB()">Export Backup</button>
+        <button class="btn danger-btn" onclick="clearDatabase()">Clear Database</button>
+      </div>
+
+      <!-- Stats -->
+      <div class="glass-card stat-card">
+        <h3>📊 Question Count</h3>
+        <div id="questionCount">0</div>
+        <span>Total MCQs Stored</span>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<script src="db.js"></script>
+<script src="importer.js"></script>
+
+<script>
+async function refreshStats() {
+  const all = await DB.getAllQuestions();
+  document.getElementById("questionCount").textContent = all.length;
+}
+refreshStats();
+
+/* Import */
+async function handleImport() {
+  const file = document.getElementById("fileInput").files[0];
+  const status = document.getElementById("importStatus");
+
+  if (!file) return alert("Select a file");
+
+  try {
+    let count = 0;
+    if (file.name.endsWith(".json")) {
+      count = await Importer.importJSON(file);
+    } else if (file.name.endsWith(".csv")) {
+      count = await Importer.importCSV(file);
+    } else {
+      return alert("Unsupported file");
+    }
+
+    status.textContent = `✅ Imported ${count} questions`;
+    refreshStats();
+  } catch (e) {
+    status.textContent = "❌ Import failed";
+  }
+}
+
+/* Export */
+async function exportDB() {
+  const data = await DB.exportDatabase();
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "mcq_backup.json";
+  a.click();
+}
+
+/* Clear */
+async function clearDatabase() {
+  if (!confirm("Delete ALL questions permanently?")) return;
+
+  const all = await DB.getAllQuestions();
+  for (let q of all) await DB.deleteQuestion(q.id);
+
+  refreshStats();
+  alert("Database cleared");
+}
+</script>
+
+</body>
+</html>

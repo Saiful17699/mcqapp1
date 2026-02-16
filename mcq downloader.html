@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Test CSV — MCQ App</title>
+  <style>
+    body { font-family: Arial; padding: 40px; text-align: center; }
+    button { padding: 12px 20px; font-size: 16px; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+<h1>Download Example MCQ CSV</h1>
+<p>Click the button below to download a test CSV for your MCQ app.</p>
+
+<button onclick="downloadCSV()">Download CSV</button>
+
+<script>
+function downloadCSV() {
+  const csvContent = `id,question_text,option1,option2,option3,option4,correct_answer_index,explanation,subject,chapter,topic,difficulty
+1,What is the capital of France?,Paris,Lyon,Marseille,Nice,0,Paris is the capital city of France.,Geography,Europe,Capitals,Easy
+2,Which element has the chemical symbol 'O'?,Oxygen,Gold,Hydrogen,Iron,0,Oxygen has the chemical symbol 'O'.,Chemistry,Periodic Table,Elements,Easy
+3,2 + 2 equals?,3,4,5,,1,2 + 2 = 4.,Math,Arithmetic,Addition,Easy
+4,Which planet is known as the Red Planet?,Venus,Earth,Mars,Jupiter,2,Mars is called the Red Planet due to its iron oxide.,Astronomy,Planets,Inner Planets,Medium
+5,Who wrote 'Hamlet'?,Charles Dickens,William Shakespeare,Mark Twain,Leo Tolstoy,1,Hamlet was written by William Shakespeare.,Literature,Plays,Shakespeare Works,Medium
+6,Water boils at what temperature at sea level?,90°C,100°C,120°C,80°C,1,Water boils at 100°C at standard atmospheric pressure.,Science,Physics,Thermodynamics,Easy
+7,Which programming language is used for web development primarily?,Python,C++,JavaScript,Java,2,JavaScript is the standard language for web development.,Computer Science,Programming,Web Development,Medium`;
+
+  const blob = new Blob([csvContent], { type: 'text/csv' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'mcq_example.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>

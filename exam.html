@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exam — MCQ App</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="exam.css">
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- Header -->
+  <header class="app-header glass-card">
+    <h1>📝 MCQ Examination</h1>
+    <a href="index.html" class="btn exit-btn">← Exit</a>
+  </header>
+
+  <!-- Exam Setup -->
+  <section id="setupPanel" class="glass-card exam-setup">
+
+    <h2>Exam Settings</h2>
+
+    <div class="input-group">
+      <label for="totalQuestions">Total Questions</label>
+      <input type="number" id="totalQuestions" value="10">
+    </div>
+
+    <div class="input-group">
+      <label for="timeLimit">Time Limit (Minutes)</label>
+      <input type="number" id="timeLimit" value="10">
+    </div>
+
+    <button class="btn primary-btn start-btn" onclick="startExam()">
+      Start Exam
+    </button>
+
+  </section>
+
+  <!-- Exam Panel -->
+  <section id="examPanel" class="glass-card exam-panel" style="display:none">
+
+    <div class="exam-top-bar">
+      <span id="progressText">Question 0 / 0</span>
+      <span id="timerDisplay">⏱ 00:00</span>
+    </div>
+
+    <div id="questionBox" class="question-box"></div>
+
+    <div class="nav-buttons">
+      <button class="btn nav-btn" onclick="prevQ()">Previous</button>
+      <button class="btn nav-btn" onclick="nextQ()">Next</button>
+      <button class="btn success-btn" onclick="submitExam()">Submit</button>
+    </div>
+
+  </section>
+
+  <!-- Result Panel -->
+  <section id="resultPanel" class="glass-card result-panel" style="display:none">
+
+    <h2>📊 Result</h2>
+
+    <div id="resultBox" class="result-box"></div>
+
+    <button class="btn primary-btn" onclick="location.reload()">New Exam</button>
+
+  </section>
+
+</div>
+
+<!-- Scripts -->
+<script src="db.js"></script>
+<script src="session.js"></script>
+<script src="engine.js"></script>
+<script src="timer.js"></script>
+<script>
+  let examTimer;
+
+  async function startExam() {
+    const total = Number(document.getElementById("totalQuestions").value);
+    const time = Number(document.getElementById("timeLimit").value);
+    try {
+      await ExamEngine.loadQuestions({ totalQuestions: total });
+      document.getElementById("setupPanel").style.display = "none";
+      document.getElementById("examPanel").style.display = "block";
+      renderQuestion();
+      examTimer = Timer.start(time * 60, updateTimer, submitExam);
+    } catch (err) {
+      alert(err);
+    }
+  }
+
+  function renderQuestion() {
+    const q = ExamEngine.getCurrentQuestion();
+    const progress = ExamEngine.getProgress();
+    document.getElementById("progressText").textContent = `Question ${progress.current} / ${progress.total}`;
+    let html = `<h3>${q.question_text}</h3>`;
+    q.options.forEach((opt, i) => {
+      const checked = ExamEngine.getUserAnswer(q.id) === i ? "checked" : "";
+      html += `
+        <label class="option">
+          <input type="radio" name="option" ${checked} onchange="selectAnswer(${i})">
+          ${opt}
+        </label>
+      `;
+    });
+    document.getElementById("questionBox").innerHTML = html;
+  }
+
+  function nextQ() { ExamEngine.nextQuestion(); renderQuestion(); }
+  function prevQ() { ExamEngine.prevQuestion(); renderQuestion(); }
+  function selectAnswer(index) {
+    const q = ExamEngine.getCurrentQuestion();
+    ExamEngine.saveAnswer(q.id, index);
+  }
+
+  function updateTimer(seconds) {
+    const min = Math.floor(seconds / 60);
+    const sec = seconds % 60;
+    document.getElementById("timerDisplay").textContent = `⏱ ${min}:${sec.toString().padStart(2,"0")}`;
+  }
+
+  async function submitExam() {
+    if(examTimer) Timer.stop();
+    const result = await ExamEngine.submitExam();
+    document.getElementById("examPanel").style.display = "none";
+    document.getElementById("resultPanel").style.display = "block";
+    document.getElementById("resultBox").innerHTML = `
+      <p>Total: ${result.total_questions}</p>
+      <p>Correct: ${result.correct}</p>
+      <p>Wrong: ${result.wrong}</p>
+      <p>Score: ${result.percentage}%</p>
+      <p>Time: ${result.time_taken_seconds}s</p>
+    `;
+  }
+</script>
+
+</body>
+</html>
