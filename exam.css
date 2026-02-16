@@ -247,13 +247,3 @@ body {
 }
 
 
-.theme-btn {
-  margin-right: 10px;
-  background: #222;
-  color: #fff;
-  border: none;
-}
-
-.theme-btn:hover {
-  background: #444;
-}
