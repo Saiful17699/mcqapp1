@@ -149,6 +149,18 @@ body {
   font-size: 14px;
   color: var(--text-muted);
 }
+/* Dark mode button */
+.theme-btn {
+  margin-right: 10px;
+  background: #f5f5f5;
+  color: #111;
+  border: none;
+}
+
+.theme-btn:hover {
+  background: #ddd;
+}
+
 
 /* Question Box */
 .question-box {
@@ -272,17 +284,6 @@ body {
     background: rgba(255,255,255,0.05);
     color: var(--text-dark);
   }
-}
-
-.theme-btn {
-  margin-right: 10px;
-  background: #f5f5f5;
-  color: #111;
-  border: none;
-}
-
-.theme-btn:hover {
-  background: #ddd;
 }
 
 
