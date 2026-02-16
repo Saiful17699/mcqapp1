@@ -6,17 +6,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="exam.css">
+<!-- Styles -->
+<link id="lightTheme" rel="stylesheet" href="exam.css">
+<link id="darkTheme" rel="stylesheet" href="examdark.css" disabled>
 </head>
 <body>
 
 <div class="app-container">
 
   <!-- Header -->
-  <header class="app-header glass-card">
-    <h1>📝 MCQ Examination</h1>
+ <header class="app-header glass-card">
+  <h1>📝 MCQ Examination</h1>
+
+  <div class="header-actions">
+    <button class="btn theme-btn" onclick="toggleTheme()" id="themeToggle">
+      🌙 Dark Mode
+    </button>
     <a href="index.html" class="btn exit-btn">← Exit</a>
-  </header>
+  </div>
+</header>
+
 
   <!-- Exam Setup -->
   <section id="setupPanel" class="glass-card exam-setup">
@@ -135,7 +144,35 @@
       <p>Time: ${result.time_taken_seconds}s</p>
     `;
   }
+    const lightTheme = document.getElementById("lightTheme");
+  const darkTheme = document.getElementById("darkTheme");
+  const themeToggle = document.getElementById("themeToggle");
+
+  function toggleTheme() {
+    if (darkTheme.disabled) {
+      darkTheme.disabled = false;
+      lightTheme.disabled = true;
+      themeToggle.textContent = "☀️ Light Mode";
+      localStorage.setItem("theme", "dark");
+    } else {
+      darkTheme.disabled = true;
+      lightTheme.disabled = false;
+      themeToggle.textContent = "🌙 Dark Mode";
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  // Load saved theme on refresh
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      darkTheme.disabled = false;
+      lightTheme.disabled = true;
+      themeToggle.textContent = "☀️ Light Mode";
+    }
+  });
 </script>
 
 </body>
 </html>
+
